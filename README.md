@@ -1,6 +1,6 @@
 # solarpy
 
-Solarpy est une simulation de système solaire entièrement programmée en Python dans le cadre de l'épreuve du bac d'ISN.
+Solarpy est une simulation de système solaire entièrement programmée en Python dans le cadre de l'épreuve du bac d'ISN. Ce projet est donc un travaille en collaboration avec un camarade.
 
 Les modules utilisé sont:
   - tkinter
