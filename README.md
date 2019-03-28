@@ -9,3 +9,7 @@ Les modules utilisé sont:
   - numpy
   - pygame
   - skyfield
+  
+Ces modules sont donc nécessaires pour éxécuter correctement la simulation.
+
+/!\ Ne lancez pas le programme en plein écran après modification ou dès la première exécution car en cas d'erreur il sera impossible de quitter le programme. Pour désactiver le plein écran, décochez la case correspondante dans la première interface qui apparait.
