@@ -2,7 +2,7 @@
 
 Solarpy est une simulation de système solaire entièrement programmée en Python dans le cadre de l'épreuve du bac d'ISN. Ce projet est donc un travaille en collaboration avec un camarade.
 
-Les modules utilisé sont:
+Les modules utilisés sont:
   - tkinter
   - pyOpenGL
   - Pillow
@@ -12,9 +12,9 @@ Les modules utilisé sont:
   
 Ces modules sont donc nécessaires pour éxécuter correctement la simulation.
 
- Pour lancer la simulation, il faut exécuter le programme "solarpy.py".
+Pour lancer la simulation, il faut exécuter le programme "solarpy.py".
  
- Les touches de déplacement sont:
+Les touches de déplacement sont:
     w --> zoom arrière
     x --> zoom avant
     e --> rotation négative sur l'axe X
@@ -26,7 +26,7 @@ Ces modules sont donc nécessaires pour éxécuter correctement la simulation.
     
     (Ces touches sont modifiables dans le code "simulation.py")
  
- Avertissements:
+Avertissements:
     - La simulation met du temps à charger les textures lors de son lancement. Un écran noir est affiché durant toute la durée du chargement. Il suffit d'attendre de voir les planètes s'afficher.
 
 
