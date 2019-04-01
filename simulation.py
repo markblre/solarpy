@@ -188,7 +188,7 @@ def goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth,
 
     def run():
         pygame.init()
-        screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE|OPENGL|DOUBLEBUF|FULLSCREEN)
+        screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE|OPENGL|DOUBLEBUF)#|FULLSCREEN)
         pygame.display.set_caption("Solarpy")
         
         resize(*SCREEN_SIZE)
@@ -205,23 +205,23 @@ def goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth,
         global saturnTexture
         global uranusTexture
         global neptuneTexture
-        sunTexture = read_texture('sun.jpg')
+        sunTexture = read_texture('img/sun.jpg')
         print("20%")
-        mercuryTexture = read_texture('mercury.jpg')
+        mercuryTexture = read_texture('img/mercury.jpg')
         print("30%")
-        venusTexture = read_texture('venus.jpg')
+        venusTexture = read_texture('img/venus.jpg')
         print("40%")
-        earthTexture = read_texture('earth.jpg')
+        earthTexture = read_texture('img/earth.jpg')
         print("50%")
-        marsTexture = read_texture('mars.jpg')
+        marsTexture = read_texture('img/mars.jpg')
         print("60%")
-        jupiterTexture = read_texture('jupiter.jpg')
+        jupiterTexture = read_texture('img/jupiter.jpg')
         print("70%")
-        saturnTexture = read_texture('saturn.jpg')
+        saturnTexture = read_texture('img/saturn.jpg')
         print("80%")
-        uranusTexture = read_texture('uranus.jpg')
+        uranusTexture = read_texture('img/uranus.jpg')
         print("90%")
-        neptuneTexture = read_texture('neptune.jpg')
+        neptuneTexture = read_texture('img/neptune.jpg')
         print("99%")
              
         glMaterial(GL_FRONT, GL_AMBIENT, (0.1, 0.1, 0.1, 1.0))    
