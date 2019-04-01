@@ -455,7 +455,7 @@ def goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth,
             if(showSun == 1):
                 Sun.render()
             
-            # Afficher
+            #Display
             pygame.display.flip()
             pygame.time.wait(10)
             time.sleep(0.01)
