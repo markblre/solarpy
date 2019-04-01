@@ -1,11 +1,12 @@
-#SCREEN_SIZE = (2880, 1800)
-#SCREEN_SIZE = (1920, 1200)
-SCREEN_SIZE = (1680, 1050)
 from simulation import *
 from tkinter import *
 from tkinter.messagebox import *
 from tkinter import filedialog
-    
+
+fullScreen = False
+SCREEN_SIZE_W = 0
+SCREEN_SIZE_H = 0
+
 #afficher les planetes ?
 showSun = 0
 showMercury = 0
@@ -29,6 +30,9 @@ second = 0
 speed = 1
 
 def incrementerVar():
+    global fullScreen
+    global SCREEN_SIZE_W
+    global SCREEN_SIZE_H
     global showSun
     global showMercury
     global showVenus
@@ -45,7 +49,11 @@ def incrementerVar():
     global minute
     global second
     global speed
-    
+
+    fullScreen = varFullScreen.get()
+    SCREEN_SIZE_W = int(sSCREEN_SIZE_W.get())
+    SCREEN_SIZE_H = int(sSCREEN_SIZE_H.get())
+
     showSun = varShowSun.get()
     showMercury = varShowMercury.get()
     showVenus = varShowVenus.get()
@@ -66,20 +74,30 @@ def incrementerVar():
     speed = float(sVitesse.get())
     
 def lauchSimulation():
+    global SCREEN_SIZE_W, SCREEN_SIZE_H
     incrementerVar()
     
     realTime = False
-    
-    goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth, showMars,
+
+    if(fullScreen):
+        SCREEN_SIZE_W = int(fenetre.winfo_screenwidth())*2
+        SCREEN_SIZE_H = int(fenetre.winfo_screenheight())*2
+        
+    goSimulation((SCREEN_SIZE_W, SCREEN_SIZE_H), fullScreen, showSun, showMercury, showVenus, showEarth, showMars,
                  showJupiter, showSaturn, showUranus, showNeptune,
                  years, month, day, hour, minute, second, realTime, speed)
 
 def lauchSimulationInRealTime():
+    global SCREEN_SIZE_W, SCREEN_SIZE_H
     incrementerVar()
 
     realTime = True
+
+    if(fullScreen):
+        SCREEN_SIZE_W = int(fenetre.winfo_screenwidth())*2
+        SCREEN_SIZE_H = int(fenetre.winfo_screenheight())*2
     
-    goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth, showMars,
+    goSimulation((SCREEN_SIZE_W, SCREEN_SIZE_H), fullScreen, showSun, showMercury, showVenus, showEarth, showMars,
                  showJupiter, showSaturn, showUranus, showNeptune,
                  years, month, day, hour, minute, second, realTime, speed)
 
@@ -94,7 +112,7 @@ def saveFile(ev=None):
         saveFileAs()
     else:
         fichier = open(fenetre.filename, "w")
-        fichier.write(str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
+        fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
                       + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
                       + "\n" + str(hour) + "\n" + str(minute) + "\n" + str(second) + "\n" + str(speed))
         fichier.close()
@@ -103,7 +121,7 @@ def saveFileAs(ev=None):
     incrementerVar()
     fenetre.filename =  filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
     fichier = open(fenetre.filename, "w")
-    fichier.write(str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
+    fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
                   + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
                   + "\n" + str(hour) + "\n" + str(minute) + "\n" + str(second) + "\n" + str(speed))
     fichier.close()
@@ -112,71 +130,82 @@ def openFile(ev=None):
     fenetre.filename =  filedialog.askopenfilename(initialdir = "/",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
     fichier = open(fenetre.filename, "r")
     fichierSplit = str(fichier.read()).split()
-    
+
     if fichierSplit[0] == "0":
+        boutonFullScreen.deselect()
+    else:
+        boutonFullScreen.select()
+
+    varsSCREEN_SIZE_W.set(fichierSplit[1])
+    varsSCREEN_SIZE_H.set(fichierSplit[2])
+        
+    if fichierSplit[3] == "0":
         boutonShowSun.deselect()
     else:
         boutonShowSun.select()
 
-    if fichierSplit[1] == "0":
+    if fichierSplit[4] == "0":
         boutonShowMercury.deselect()
     else:
         boutonShowMercury.select()
     fichier.close()
 
-    if fichierSplit[2] == "0":
+    if fichierSplit[5] == "0":
         boutonShowVenus.deselect()
     else:
         boutonShowVenus.select()
     fichier.close()
 
-    if fichierSplit[3] == "0":
+    if fichierSplit[6] == "0":
         boutonShowEarth.deselect()
     else:
         boutonShowEarth.select()
     fichier.close()
 
-    if fichierSplit[4] == "0":
+    if fichierSplit[7] == "0":
         boutonShowMars.deselect()
     else:
         boutonShowMars.select()
     fichier.close()
 
-    if fichierSplit[5] == "0":
+    if fichierSplit[8] == "0":
         boutonShowJupiter.deselect()
     else:
         boutonShowJupiter.select()
     fichier.close()
 
-    if fichierSplit[6] == "0":
+    if fichierSplit[9] == "0":
         boutonShowSaturn.deselect()
     else:
         boutonShowSaturn.select()
     fichier.close()
 
-    if fichierSplit[7] == "0":
+    if fichierSplit[10] == "0":
         boutonShowUranus.deselect()
     else:
         boutonShowUranus.select()
     fichier.close()
 
-    if fichierSplit[8] == "0":
+    if fichierSplit[11] == "0":
         boutonShowNeptune.deselect()
     else:
         boutonShowNeptune.select()
 
-    varsAnnee.set(fichierSplit[9])
-    varsMois.set(fichierSplit[10])
-    varsJour.set(fichierSplit[11])
-    varsHeure.set(fichierSplit[12])
-    varsMinute.set(fichierSplit[13])
-    varsSeconde.set(fichierSplit[14])
+    varsAnnee.set(fichierSplit[12])
+    varsMois.set(fichierSplit[13])
+    varsJour.set(fichierSplit[14])
+    varsHeure.set(fichierSplit[15])
+    varsMinute.set(fichierSplit[16])
+    varsSeconde.set(fichierSplit[17])
 
-    varsVitesse.set(fichierSplit[15])
+    varsVitesse.set(fichierSplit[18])
 
     fichier.close()
 
 def reset():
+    boutonFullScreen.deselect()
+    varsSCREEN_SIZE_W.set(fenetre.winfo_screenwidth())
+    varsSCREEN_SIZE_H.set(fenetre.winfo_screenheight())
     boutonShowSun.deselect()
     boutonShowMercury.deselect()
     boutonShowVenus.deselect()
@@ -247,7 +276,10 @@ menubar.add_cascade(label="Aide", menu=menu2)
 
 fenetre.config(menu=menubar)
 
-#show planets
+#vars
+varFullScreen = IntVar()
+varsSCREEN_SIZE_W = StringVar()
+varsSCREEN_SIZE_H = StringVar()
 varShowSun = IntVar()
 varShowMercury = IntVar()
 varShowVenus = IntVar()
@@ -265,6 +297,20 @@ varsMinute = StringVar()
 varsSeconde = StringVar()
 varsVitesse = StringVar()
 
+#buttons
+#display
+boutonFullScreen = Checkbutton(fenetre, text="Full Screen", variable=varFullScreen)
+boutonFullScreen.pack()
+labelSCREEN_SIZE_W = Label(fenetre, text="Screen size width")
+labelSCREEN_SIZE_W.pack()
+sSCREEN_SIZE_W = Spinbox(fenetre, from_=0, textvariable=varsSCREEN_SIZE_W)
+sSCREEN_SIZE_W.pack()
+labelSCREEN_SIZE_H = Label(fenetre, text="Screen size height")
+labelSCREEN_SIZE_H.pack()
+sSCREEN_SIZE_H = Spinbox(fenetre, from_=0, textvariable=varsSCREEN_SIZE_H)
+sSCREEN_SIZE_H.pack()
+
+#planets
 boutonSelectAll = Button(fenetre, text="Select/Deselect all", command=SelectDeselectAll)
 boutonSelectAll.pack()
 boutonShowSun = Checkbutton(fenetre, text="ShowSun", variable=varShowSun)
@@ -324,4 +370,5 @@ boutonStart.pack()
 boutonStartRealTime = Button(fenetre, text="Launch with real time", command=lauchSimulationInRealTime)
 boutonStartRealTime.pack()
 
+reset()
 fenetre.mainloop()

@@ -18,7 +18,7 @@ ts = load.timescale()
 second = 0
 realTim = False
 
-def goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth,
+def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showEarth,
                  showMars, showJupiter, showSaturn, showUranus, showNeptune,
                  years, month, day, hour, minute, seconde, realTime, speed):
 
@@ -188,7 +188,13 @@ def goSimulation(SCREEN_SIZE, showSun, showMercury, showVenus, showEarth,
 
     def run():
         pygame.init()
-        screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE|OPENGL|DOUBLEBUF)#|FULLSCREEN)
+
+        if(fullScreen):
+            infoObject = pygame.display.Info()
+            screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE|OPENGL|DOUBLEBUF|FULLSCREEN)
+        else:
+            screen = pygame.display.set_mode(SCREEN_SIZE, HWSURFACE|OPENGL|DOUBLEBUF)
+            
         pygame.display.set_caption("Solarpy")
         
         resize(*SCREEN_SIZE)
