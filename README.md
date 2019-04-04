@@ -1,4 +1,4 @@
-# solarpy
+# Solarpy
 
 # À propos
 
