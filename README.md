@@ -1,5 +1,7 @@
 # solarpy
 
+# À propos
+
 Solarpy est une simulation de système solaire entièrement programmée entièrement en Python. Ce projet est un travail en collaboration avec un camarade.
 
 Le programme vous permet d'observer le système solaire en vous déplacent dans l'espace grâce aux touches de votre clavier. Vous pouvez choisir au lancement du programme quelles planètes vous voulez afficher et la date à laquelle vous voulez les observer.
