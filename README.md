@@ -26,3 +26,5 @@ Lors du lancement de la simulation, vous êtes à une distance du soleil qui vou
 
 # Remerciements:
   - Toutes les images et textures du logiciel sont issues du site: https://www.solarsystemscope.com/textures/
+  - Travaux qui ont servi pour créer les sphères et les trajectoires: http://fab.cba.mit.edu/classes/864.11/people/Moritz_Kassner/
+  - Forum qui a servi pour les textures: https://stackoverflow.com/questions/43033625/why-my-texture-is-not-showing-pyopengl/43038405#43038405
