@@ -19,7 +19,7 @@ second = 0
 realTim = False
 
 def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showEarth,
-                 showMars, showJupiter, showSaturn, showUranus, showNeptune,
+                 showMars, showJupiter, showSaturn, showUranus, showNeptune, showPaths,
                  years, month, day, hour, minute, seconde, realTime, speed):
 
     global second
@@ -267,6 +267,16 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
         #y  Z-1
 
         pygame.key.set_repeat(1,20)
+
+        #historiques trajectoires:
+        pos_hist_mercury = []
+        pos_hist_venus = []
+        pos_hist_earth = []
+        pos_hist_mars = []
+        pos_hist_jupiter = []
+        pos_hist_saturn = []
+        pos_hist_uranus = []
+        pos_hist_neptune = []
         
         while True:
             for event in pygame.event.get():          
@@ -381,7 +391,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if not realTim:
                 t = ts.utc(years, month, day, hour, minute, second)
-                second += (speed/100)
+                second += (speed)
                 
             if realTim:
                 t = ts.now()
@@ -394,6 +404,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 MercuryZ = posMercury[2] * 1.3
                 Mercury = Ball([MercuryX,MercuryY,MercuryZ], "mercuryTexture", mercurySize * sizeBall)
                 Mercury.render()
+                if (showPaths):
+                    pos_hist_mercury.append((MercuryX,MercuryY,MercuryZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xMercury, yMercury, zMercury in pos_hist_mercury:
+                        glVertex3f(xMercury, yMercury, zMercury)
+                    glEnd()
 
             if(showVenus == 1):
                 posVenus = sun.at(t).observe(venus).position.au
@@ -403,6 +422,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 VenusZ = posVenus[2] * 1.3
                 Venus = Ball([VenusX,VenusY,VenusZ], "venusTexture", venusSize * sizeBall)
                 Venus.render()
+                if (showPaths):
+                    pos_hist_venus.append((VenusX,VenusY,VenusZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xVenus, yVenus, zVenus in pos_hist_venus:
+                        glVertex3f(xVenus, yVenus, zVenus)
+                    glEnd()
 
             if(showEarth == 1):
                 posEarth = sun.at(t).observe(earth).position.au
@@ -412,6 +440,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 EarthZ = posEarth[2] * 1.3
                 Earth = Ball([EarthX,EarthY,EarthZ], "earthTexture", earthSize * sizeBall)
                 Earth.render()
+                if (showPaths):
+                    pos_hist_earth.append((EarthX,EarthY,EarthZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xEarth, yEarth, zEarth in pos_hist_earth:
+                        glVertex3f(xEarth, yEarth, zEarth)
+                    glEnd()
 
             if(showMars == 1):
                 posMars = sun.at(t).observe(mars).position.au
@@ -421,6 +458,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 MarsZ = posMars[2] * 1.3
                 Mars = Ball([MarsX,MarsY,MarsZ], "marsTexture", marsSize * sizeBall)
                 Mars.render()
+                if (showPaths):
+                    pos_hist_mars.append((MarsX,MarsY,MarsZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xMars, yMars, zMars in pos_hist_mars:
+                        glVertex3f(xMars, yMars, zMars)
+                    glEnd()
 
             if(showJupiter == 1):
                 posJupiter = sun.at(t).observe(jupiter).position.au
@@ -430,6 +476,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 JupiterZ = posJupiter[2] * 1.3
                 Jupiter = Ball([JupiterX,JupiterY,JupiterZ], "jupiterTexture", jupiterSize * sizeBall)
                 Jupiter.render()
+                if (showPaths):
+                    pos_hist_jupiter.append((JupiterX,JupiterY,JupiterZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xJupiter, yJupiter, zJupiter in pos_hist_jupiter:
+                        glVertex3f(xJupiter, yJupiter, zJupiter)
+                    glEnd()
 
             if(showSaturn == 1):
                 posSaturn = sun.at(t).observe(saturn).position.au
@@ -439,6 +494,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 SaturnZ = posSaturn[2] * 1.3
                 Saturn = Ball([SaturnX,SaturnY,SaturnZ], "saturnTexture", saturnSize * sizeBall)
                 Saturn.render()
+                if (showPaths):
+                    pos_hist_saturn.append((SaturnX,SaturnY,SaturnZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xSaturn, ySaturn, zSaturn in pos_hist_saturn:
+                        glVertex3f(xSaturn, ySaturn, zSaturn)
+                    glEnd()
 
             if(showUranus == 1):
                 posUranus = sun.at(t).observe(uranus).position.au
@@ -448,6 +512,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 UranusZ = posUranus[2] * 1.3
                 Uranus = Ball([UranusX,UranusY,UranusZ], "uranusTexture", uranusSize * sizeBall)
                 Uranus.render()
+                if (showPaths):
+                    pos_hist_uranus.append((UranusX,UranusY,UranusZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xUranus, yUranus, zUranus in pos_hist_uranus:
+                        glVertex3f(xUranus, yUranus, zUranus)
+                    glEnd()
 
             if(showNeptune == 1):
                 posNeptune = sun.at(t).observe(neptune).position.au
@@ -457,6 +530,16 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 NeptuneZ = posNeptune[2] * 1.3
                 Neptune = Ball([NeptuneX,NeptuneY,NeptuneZ], "neptuneTexture", neptuneSize * sizeBall)
                 Neptune.render()
+                if (showPaths):
+                    pos_hist_neptune.append((NeptuneX,NeptuneY,NeptuneZ))
+                    #render the path
+                    glColor3f(255,255,255)
+                    glLineWidth(1)
+                    glBegin(GL_LINE_STRIP)
+                    for xNeptune, yNeptune, zNeptune in pos_hist_neptune:
+                        glVertex3f(xNeptune, yNeptune, zNeptune)
+                    glEnd()
+
 
             if(showSun == 1):
                 Sun.render()

@@ -18,6 +18,8 @@ showSaturn = 0
 showUranus = 0
 showNeptune = 0
 
+showPaths = 0
+
 #date
 years = 1979
 month = 3
@@ -42,6 +44,7 @@ def incrementerVar():
     global showSaturn
     global showUranus
     global showNeptune
+    global showPaths
     global years
     global month
     global day
@@ -64,6 +67,8 @@ def incrementerVar():
     showUranus = varShowUranus.get()
     showNeptune = varShowNeptune.get()
 
+    showPaths = varShowPaths.get()
+
     years = int(sAnnee.get())
     month = int(sMois.get())
     day = int(sJour.get())
@@ -84,7 +89,7 @@ def lauchSimulation():
         SCREEN_SIZE_H = int(fenetre.winfo_screenheight())*2
         
     goSimulation((SCREEN_SIZE_W, SCREEN_SIZE_H), fullScreen, showSun, showMercury, showVenus, showEarth, showMars,
-                 showJupiter, showSaturn, showUranus, showNeptune,
+                 showJupiter, showSaturn, showUranus, showNeptune, showPaths,
                  years, month, day, hour, minute, second, realTime, speed)
 
 def lauchSimulationInRealTime():
@@ -98,7 +103,7 @@ def lauchSimulationInRealTime():
         SCREEN_SIZE_H = int(fenetre.winfo_screenheight())*2
     
     goSimulation((SCREEN_SIZE_W, SCREEN_SIZE_H), fullScreen, showSun, showMercury, showVenus, showEarth, showMars,
-                 showJupiter, showSaturn, showUranus, showNeptune,
+                 showJupiter, showSaturn, showUranus, showNeptune, showPaths,
                  years, month, day, hour, minute, second, realTime, speed)
 
 #tkinter
@@ -120,16 +125,17 @@ def saveFile(ev=None):
     else:
         fichier = open(fenetre.filename, "w")
         fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
-                      + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
+                      + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(showPaths) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
                       + "\n" + str(hour) + "\n" + str(minute) + "\n" + str(second) + "\n" + str(speed))
         fichier.close()
 
 def saveFileAs(ev=None):
     incrementerVar()
+    
     fenetre.filename =  filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
     fichier = open(fenetre.filename, "w")
     fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
-                  + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
+                  + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(showPaths) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
                   + "\n" + str(hour) + "\n" + str(minute) + "\n" + str(second) + "\n" + str(speed))
     fichier.close()
 
@@ -198,14 +204,19 @@ def openFile(ev=None):
     else:
         boutonShowNeptune.select()
 
-    varsAnnee.set(fichierSplit[12])
-    varsMois.set(fichierSplit[13])
-    varsJour.set(fichierSplit[14])
-    varsHeure.set(fichierSplit[15])
-    varsMinute.set(fichierSplit[16])
-    varsSeconde.set(fichierSplit[17])
+    if fichierSplit[12] == "0":
+        boutonShowPaths.deselect()
+    else:
+        boutonShowPaths.select()
 
-    varsVitesse.set(fichierSplit[18])
+    varsAnnee.set(fichierSplit[13])
+    varsMois.set(fichierSplit[14])
+    varsJour.set(fichierSplit[15])
+    varsHeure.set(fichierSplit[16])
+    varsMinute.set(fichierSplit[17])
+    varsSeconde.set(fichierSplit[18])
+
+    varsVitesse.set(fichierSplit[19])
 
     fichier.close()
 
@@ -222,6 +233,7 @@ def reset():
     boutonShowSaturn.deselect()
     boutonShowUranus.deselect()
     boutonShowNeptune.deselect()
+    boutonShowPaths.deselect()
     varsAnnee.set("1970")
     varsMois.set("1")
     varsJour.set("1")
@@ -297,6 +309,7 @@ varShowJupiter = IntVar()
 varShowSaturn = IntVar()
 varShowUranus = IntVar()
 varShowNeptune = IntVar()
+varShowPaths = IntVar()
 varsAnnee = StringVar()
 varsMois = StringVar()
 varsJour = StringVar()
@@ -349,6 +362,10 @@ boutonShowUranus = Checkbutton(starsLabelFrame, text="Show Uranus", variable=var
 boutonShowUranus.pack()
 boutonShowNeptune = Checkbutton(starsLabelFrame, text="Show Neptune", variable=varShowNeptune, font=(None,policeSize))
 boutonShowNeptune.pack()
+labelBlank = Label(starsLabelFrame, text="", font=(None,policeSize))
+labelBlank.pack()
+boutonShowPaths = Checkbutton(starsLabelFrame, text="Show paths", variable=varShowPaths, font=(None,policeSize))
+boutonShowPaths.pack()
 
 #date
 labelAnnee = Label(dateLabelFrame, text="Years", font=(None,policeSize))
