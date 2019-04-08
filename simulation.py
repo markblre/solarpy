@@ -284,7 +284,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pygame.quit()
                     quit()
 
-                if event.type == KEYDOWN and event.key == K_p:
+                if event.type == KEYDOWN and event.key == K_ESCAPE:
                     pygame.quit()
                     quit()
                 
