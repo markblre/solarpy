@@ -277,8 +277,11 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
         pos_hist_saturn = []
         pos_hist_uranus = []
         pos_hist_neptune = []
+
+        tpsCalcul = 0
         
         while True:
+            mt = time.time()
             for event in pygame.event.get():          
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -288,7 +291,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pygame.quit()
                     quit()
                 
-                if event.type == KEYDOWN and event.key == K_x:
+                if event.type == KEYDOWN and event.key == K_UP:
                     for i in saveChangeRotate:
                         if i == "a":
                             glRotatef(-1, 1, 0, 0)
@@ -319,7 +322,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                         elif i == "y":
                             glRotatef(-1, 0, 0, 1)
                             
-                if event.type == KEYDOWN and event.key == K_w:
+                if event.type == KEYDOWN and event.key == K_DOWN:
                     for i in saveChangeRotate:
                         if i == "a":
                             glRotatef(-1, 1, 0, 0)
@@ -351,29 +354,29 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                             glRotatef(-1, 0, 0, 1)
 
 
-                if event.type == KEYDOWN and event.key == K_r:
+                if event.type == KEYDOWN and event.key == K_a:
                     glRotatef(1, 1, 0, 0) #(degres, x, y, z)
                     saveChangeRotate = "a" + saveChangeRotate
                     saveChangeRotateReturn += "a"
-                if event.type == KEYDOWN and event.key == K_e:
+                if event.type == KEYDOWN and event.key == K_z:
                     glRotatef(-1, 1, 0, 0)
                     saveChangeRotate = "z" + saveChangeRotate
                     saveChangeRotateReturn += "z"
 
-                if event.type == KEYDOWN and event.key == K_f:
+                if event.type == KEYDOWN and event.key == K_LEFT:
                     glRotatef(1, 0, 1, 0)
                     saveChangeRotate = "e" + saveChangeRotate
                     saveChangeRotateReturn += "e"
-                if event.type == KEYDOWN and event.key == K_d:
+                if event.type == KEYDOWN and event.key == K_RIGHT:
                     glRotatef(-1, 0, 1, 0)
                     saveChangeRotate = "r" + saveChangeRotate
                     saveChangeRotateReturn += "r"
 
-                if event.type == KEYDOWN and event.key == K_v:
+                if event.type == KEYDOWN and event.key == K_q:
                     glRotatef(1, 0, 0, 1)
                     saveChangeRotate = "t" + saveChangeRotate
                     saveChangeRotateReturn += "t"
-                if event.type == KEYDOWN and event.key == K_c:
+                if event.type == KEYDOWN and event.key == K_s:
                     glRotatef(-1, 0, 0, 1)
                     saveChangeRotate = "y" + saveChangeRotate
                     saveChangeRotateReturn += "y"
@@ -390,8 +393,9 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
             global realTim
 
             if not realTim:
+                second += tpsCalcul*speed
                 t = ts.utc(years, month, day, hour, minute, second)
-                second += (speed)
+                print(t.utc)
                 
             if realTim:
                 t = ts.now()
@@ -546,7 +550,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
             
             #Display
             pygame.display.flip()
-            pygame.time.wait(10)
-            time.sleep(0.01)
-    
+
+            tpsCalcul = (time.time()-mt)
     run()

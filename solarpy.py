@@ -402,7 +402,7 @@ sVitesse.pack()
 #boutons start
 boutonStart = Button(fenetre, text="Launch", command=lauchSimulation, font=(None,policeSize))
 boutonStart.place(x=m[0]-300-10, y=(m[1]/2)-12.5-50, width=250, height=50)
-boutonStartRealTime = Button(fenetre, text="Launch with actual time", command=lauchSimulationInRealTime, font=(None,policeSize))
+boutonStartRealTime = Button(fenetre, text="Launch in live", command=lauchSimulationInRealTime, font=(None,policeSize))
 boutonStartRealTime.place(x=m[0]-300-10, y=(m[1]/2)-12.5+50, width=250, height=50)
 
 reset()
