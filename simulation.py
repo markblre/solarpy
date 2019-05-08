@@ -15,20 +15,15 @@ import time
 
 ts = load.timescale()
 
-second = 0
-realTim = False
+localSeconde = 0
 
 def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showEarth,
                  showMars, showJupiter, showSaturn, showUranus, showNeptune, showPaths,
                  years, month, day, hour, minute, seconde, realTime, speed):
 
-    global second
-    global realTim
-    second = seconde
-    realTim = realTime
+    localSeconde = seconde
     
     planets = load('de421.bsp')
-
     sun = planets['sun']
     mercury = planets['mercury barycenter']
     venus = planets['venus barycenter']
@@ -202,6 +197,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
         print("10%")
 
+        #loading textures + storage
         global sunTexture
         global mercuryTexture
         global venusTexture
@@ -245,17 +241,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
         uranusSize = 0.364
         neptuneSize = 0.354
 
-        #déclaration des planetes
-        Sun = Ball([0,0,0], "sunTexture", sunSize)
-        Mercury = Ball([0,0,0], "mercuryTexture", mercurySize * sizeBall)
-        Venus = Ball([0,0,0], "venusTexture", venusSize * sizeBall)
-        Earth = Ball([0,0,0], "earthTexture", earthSize * sizeBall)
-        Mars = Ball([0,0,0], "marsTexture", marsSize * sizeBall)
-        Jupiter = Ball([0,0,0], "jupiterTexture", jupiterSize * sizeBall)
-        Saturn = Ball([0,0,0], "saturnTexture", saturnSize * sizeBall)
-        Uranus = Ball([0,0,0], "uranusTexture", uranusSize * sizeBall)
-        Neptune = Ball([0,0,0], "neptuneTexture", neptuneSize * sizeBall)
-
         #for zoom
         saveChangeRotate = ""
         saveChangeRotateReturn = ""
@@ -266,9 +251,9 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
         #t  Z+1
         #y  Z-1
 
-        pygame.key.set_repeat(1,20)
+        pygame.key.set_repeat(1,20) #for smooth movement
 
-        #historiques trajectoires:
+        #path save:
         pos_hist_mercury = []
         pos_hist_venus = []
         pos_hist_earth = []
@@ -278,10 +263,10 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
         pos_hist_uranus = []
         pos_hist_neptune = []
 
-        tpsCalcul = 0
+        calculTime = 0
         
         while True:
-            mt = time.time()
+            startTime = time.time()
             for event in pygame.event.get():          
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -385,24 +370,27 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glLight(GL_LIGHT0, GL_POSITION,  (0, 0, 0, 1))
+            
 
             Sun = Ball([0,0,0], "sunTexture", sunSize)
-            Axes()
-            #Mise a jour des données
-            global second
-            global realTim
-
-            if not realTim:
-                second += tpsCalcul*speed
-                t = ts.utc(years, month, day, hour, minute, second)
-                print(t.utc)
+            if(showSun == 1):
+                Sun.render()
                 
-            if realTim:
-                t = ts.now()
+            Axes() #shows the axes
             
+            #Update date
+            if realTime:
+                t = ts.now()
+            else:
+                global localSeconde
+                localSeconde += calculTime*speed
+                t = ts.utc(years, month, day, hour, minute, localSeconde)
+
+            print(t.utc) #show the date used on the console
+
+            #update planets positions
             if(showMercury == 1):
                 posMercury = sun.at(t).observe(mercury).position.au
-                #print(posMercury)
                 MercuryX = posMercury[0] * 1.3
                 MercuryY = posMercury[1] * 1.3
                 MercuryZ = posMercury[2] * 1.3
@@ -420,7 +408,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showVenus == 1):
                 posVenus = sun.at(t).observe(venus).position.au
-                #print(posVenus)
                 VenusX = posVenus[0] * 1.3
                 VenusY = posVenus[1] * 1.3
                 VenusZ = posVenus[2] * 1.3
@@ -438,7 +425,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showEarth == 1):
                 posEarth = sun.at(t).observe(earth).position.au
-                #print(posEarth)
                 EarthX = posEarth[0] * 1.3
                 EarthY = posEarth[1] * 1.3
                 EarthZ = posEarth[2] * 1.3
@@ -456,7 +442,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showMars == 1):
                 posMars = sun.at(t).observe(mars).position.au
-                #print(posMars)
                 MarsX = posMars[0] * 1.3
                 MarsY = posMars[1] * 1.3
                 MarsZ = posMars[2] * 1.3
@@ -474,7 +459,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showJupiter == 1):
                 posJupiter = sun.at(t).observe(jupiter).position.au
-                #print(posJupiter)
                 JupiterX = posJupiter[0] * 1.3
                 JupiterY = posJupiter[1] * 1.3
                 JupiterZ = posJupiter[2] * 1.3
@@ -492,7 +476,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showSaturn == 1):
                 posSaturn = sun.at(t).observe(saturn).position.au
-                #print(posSaturn)
                 SaturnX = posSaturn[0] * 1.3
                 SaturnY = posSaturn[1] * 1.3
                 SaturnZ = posSaturn[2] * 1.3
@@ -510,7 +493,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showUranus == 1):
                 posUranus = sun.at(t).observe(uranus).position.au
-                #print(posUranus)
                 UranusX = posUranus[0] * 1.3
                 UranusY = posUranus[1] * 1.3
                 UranusZ = posUranus[2] * 1.3
@@ -528,7 +510,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showNeptune == 1):
                 posNeptune = sun.at(t).observe(neptune).position.au
-                #print(posNeptune)
                 NeptuneX = posNeptune[0] * 1.3
                 NeptuneY = posNeptune[1] * 1.3
                 NeptuneZ = posNeptune[2] * 1.3
@@ -543,13 +524,11 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     for xNeptune, yNeptune, zNeptune in pos_hist_neptune:
                         glVertex3f(xNeptune, yNeptune, zNeptune)
                     glEnd()
-
-
-            if(showSun == 1):
-                Sun.render()
+                    
             
             #Display
             pygame.display.flip()
 
-            tpsCalcul = (time.time()-mt)
-    run()
+            calculTime = (time.time()-startTime)
+            
+    run() #launches the pygame window
