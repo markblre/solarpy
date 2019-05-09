@@ -30,3 +30,7 @@ When launching the simulation, you are at a distance from the sun that allows yo
   - All images and textures of the software are from the site: https://www.solarsystemscope.com/textures/
   - Works that have been used to create spheres and trajectories: http://fab.cba.mit.edu/classes/864.11/people/Moritz_Kassner/
   - Forum that served for textures: https://stackoverflow.com/questions/43033625/why-my-texture-is-not-showing-pyopengl/43038405#43038405
+  
+## Licence
+
+GNU General Public License v3.0
