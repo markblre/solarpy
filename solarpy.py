@@ -273,7 +273,7 @@ def quitte():
         fenetre.destroy()
 
 #affichage
-policeSize = 16
+policeSize = 15
 #barre de menu
 menubar = Menu(fenetre)
 
@@ -320,13 +320,13 @@ varsVitesse = StringVar()
 
 #LabelFrame
 screenLabelFrame = LabelFrame(fenetre, text="Screen parameters", padx=20, pady=20, bg="white", font=(None,policeSize))
-screenLabelFrame.place(x=(m[0]/2)-225, y=(m[1]/2)-225, width=300, height=400, anchor=CENTER)
+screenLabelFrame.place(x=(m[0]/2)-225, y=(m[1]/2)-225, width=300, height=420, anchor=CENTER)
 starsLabelFrame = LabelFrame(fenetre, text="Stars parameters", padx=20, pady=20, bg="white", font=(None,policeSize))
-starsLabelFrame.place(x=(m[0]/2)-225, y=(m[1]/2)+225, width=300, height=400, anchor=CENTER)
+starsLabelFrame.place(x=(m[0]/2)-225, y=(m[1]/2)+225, width=300, height=420, anchor=CENTER)
 dateLabelFrame = LabelFrame(fenetre, text="Date parameters", padx=20, pady=20, bg="white", font=(None,policeSize))
-dateLabelFrame.place(x=(m[0]/2)+225, y=(m[1]/2)-225, width=300, height=400, anchor=CENTER)
+dateLabelFrame.place(x=(m[0]/2)+225, y=(m[1]/2)-225, width=300, height=420, anchor=CENTER)
 startLabelFrame = LabelFrame(fenetre, text="Start parameters", padx=20, pady=20, bg="white", font=(None,policeSize))
-startLabelFrame.place(x=(m[0]/2)+225, y=(m[1]/2)+225, width=300, height=400, anchor=CENTER)
+startLabelFrame.place(x=(m[0]/2)+225, y=(m[1]/2)+225, width=300, height=420, anchor=CENTER)
 
 #buttons
 #display parameters
@@ -345,29 +345,31 @@ sSCREEN_SIZE_H.pack()
 boutonSelectAll = Button(starsLabelFrame, text="Select/Deselect all", command=SelectDeselectAll, font=(None,policeSize))
 boutonSelectAll.pack()
 boutonShowSun = Checkbutton(starsLabelFrame, text="Show Sun", variable=varShowSun, font=(None,policeSize))
-boutonShowSun.pack()
+boutonShowSun.pack(anchor = "w", padx=50)
 boutonShowMercury = Checkbutton(starsLabelFrame, text="Show Mercury", variable=varShowMercury, font=(None,policeSize))
-boutonShowMercury.pack()
+boutonShowMercury.pack(anchor = "w", padx=50)
 boutonShowVenus = Checkbutton(starsLabelFrame, text="Show Venus", variable=varShowVenus, font=(None,policeSize))
-boutonShowVenus.pack()
+boutonShowVenus.pack(anchor = "w", padx=50)
 boutonShowEarth = Checkbutton(starsLabelFrame, text="Show Earth", variable=varShowEarth, font=(None,policeSize))
-boutonShowEarth.pack()
+boutonShowEarth.pack(anchor = "w", padx=50)
 boutonShowMars = Checkbutton(starsLabelFrame, text="Show Mars", variable=varShowMars, font=(None,policeSize))
-boutonShowMars.pack()
+boutonShowMars.pack(anchor = "w", padx=50)
 boutonShowJupiter = Checkbutton(starsLabelFrame, text="Show Jupiter", variable=varShowJupiter, font=(None,policeSize))
-boutonShowJupiter.pack()
+boutonShowJupiter.pack(anchor = "w", padx=50)
 boutonShowSaturn = Checkbutton(starsLabelFrame, text="Show Saturn", variable=varShowSaturn, font=(None,policeSize))
-boutonShowSaturn.pack()
+boutonShowSaturn.pack(anchor = "w", padx=50)
 boutonShowUranus = Checkbutton(starsLabelFrame, text="Show Uranus", variable=varShowUranus, font=(None,policeSize))
-boutonShowUranus.pack()
+boutonShowUranus.pack(anchor = "w", padx=50)
 boutonShowNeptune = Checkbutton(starsLabelFrame, text="Show Neptune", variable=varShowNeptune, font=(None,policeSize))
-boutonShowNeptune.pack()
+boutonShowNeptune.pack(anchor = "w", padx=50)
 labelBlank = Label(starsLabelFrame, text="", font=(None,policeSize))
 labelBlank.pack()
 boutonShowPaths = Checkbutton(starsLabelFrame, text="Show paths", variable=varShowPaths, font=(None,policeSize))
 boutonShowPaths.pack()
 
 #date
+labelInfoDate = Label(dateLabelFrame, text="(Only if the simulation is not launched in live.)", font=(None,12))
+labelInfoDate.pack()
 labelAnnee = Label(dateLabelFrame, text="Years", font=(None,policeSize))
 labelAnnee.pack()
 sAnnee = Spinbox(dateLabelFrame, from_=1970, to=10000, textvariable=varsAnnee)
@@ -393,13 +395,15 @@ labelSeconde.pack()
 sSeconde = Spinbox(dateLabelFrame, from_=0, to=60, textvariable=varsSeconde)
 sSeconde.pack()
 
-#vitesse
+#speed
+labelInfoSpeed = Label(startLabelFrame, text="(Only if the simulation is not launched in live.)", font=(None,12))
+labelInfoSpeed.pack()
 labelVitesse = Label(startLabelFrame, text="Simulation speed", font=(None,policeSize))
 labelVitesse.pack()
 sVitesse = Spinbox(startLabelFrame, from_=1.0, to=100000, textvariable=varsVitesse)
 sVitesse.pack()
 
-#boutons start
+#start button
 boutonStart = Button(fenetre, text="Launch", command=lauchSimulation, font=(None,policeSize))
 boutonStart.place(x=m[0]-300-10, y=(m[1]/2)-12.5-50, width=250, height=50)
 boutonStartRealTime = Button(fenetre, text="Launch in live", command=lauchSimulationInRealTime, font=(None,policeSize))
