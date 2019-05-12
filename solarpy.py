@@ -242,6 +242,9 @@ def reset():
     varsSeconde.set("0")
     varsVitesse.set("1.0")
 
+def about():
+    showinfo("About", "Simulation programmée en python \n par Mark Ballereau et Armand Gijs. \n \n 2019")
+    
 selectDeselect = False
 def SelectDeselectAll():
     global selectDeselect
@@ -291,7 +294,7 @@ menu1.add_command(label="Quit", command=quitte)
 menubar.add_cascade(label="File", menu=menu1)
 
 menu2 = Menu(menubar, tearoff=0)
-menu2.add_command(label="About") #ouvrir une page de crédit
+menu2.add_command(label="About", command=about)
 menubar.add_cascade(label="Help", menu=menu2)
 
 fenetre.config(menu=menubar)
