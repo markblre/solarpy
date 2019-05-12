@@ -402,6 +402,8 @@ labelVitesse = Label(startLabelFrame, text="Simulation speed", font=(None,police
 labelVitesse.pack()
 sVitesse = Spinbox(startLabelFrame, from_=1.0, to=100000, textvariable=varsVitesse)
 sVitesse.pack()
+labelInfo2Speed = Label(startLabelFrame, text="1 = real speed \n 2 = 2x real speed \n 3 = 3x real speed \n ...", font=(None,12))
+labelInfo2Speed.pack()
 
 #start button
 boutonStart = Button(fenetre, text="Launch", command=lauchSimulation, font=(None,policeSize))
