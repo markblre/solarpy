@@ -400,7 +400,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_mercury.append((MercuryX,MercuryY,MercuryZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xMercury, yMercury, zMercury in pos_hist_mercury:
                         glVertex3f(xMercury, yMercury, zMercury)
@@ -417,7 +417,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_venus.append((VenusX,VenusY,VenusZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xVenus, yVenus, zVenus in pos_hist_venus:
                         glVertex3f(xVenus, yVenus, zVenus)
@@ -434,7 +434,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_earth.append((EarthX,EarthY,EarthZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xEarth, yEarth, zEarth in pos_hist_earth:
                         glVertex3f(xEarth, yEarth, zEarth)
@@ -451,7 +451,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_mars.append((MarsX,MarsY,MarsZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xMars, yMars, zMars in pos_hist_mars:
                         glVertex3f(xMars, yMars, zMars)
@@ -468,7 +468,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_jupiter.append((JupiterX,JupiterY,JupiterZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xJupiter, yJupiter, zJupiter in pos_hist_jupiter:
                         glVertex3f(xJupiter, yJupiter, zJupiter)
@@ -485,7 +485,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_saturn.append((SaturnX,SaturnY,SaturnZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xSaturn, ySaturn, zSaturn in pos_hist_saturn:
                         glVertex3f(xSaturn, ySaturn, zSaturn)
@@ -502,7 +502,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pos_hist_uranus.append((UranusX,UranusY,UranusZ))
                     #render the path
                     glColor3f(255,255,255)
-                    glLineWidth(10)
+                    glLineWidth(1)
                     glBegin(GL_LINE_STRIP)
                     for xUranus, yUranus, zUranus in pos_hist_uranus:
                         glVertex3f(xUranus, yUranus, zUranus)
