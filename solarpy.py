@@ -124,7 +124,8 @@ def saveFile(ev=None):
         saveFileAs()
     else:
         fichier = open(fenetre.filename, "w")
-        fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
+        fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus)
+                      + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
                       + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(showPaths) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
                       + "\n" + str(hour) + "\n" + str(minute) + "\n" + str(second) + "\n" + str(speed))
         fichier.close()
@@ -134,7 +135,8 @@ def saveFileAs(ev=None):
     
     fenetre.filename =  filedialog.asksaveasfilename(initialdir = "/",title = "Select file",filetypes = (("text files","*.txt"),("all files","*.*")))
     fichier = open(fenetre.filename, "w")
-    fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus) + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
+    fichier.write(str(fullScreen) + "\n" + str(SCREEN_SIZE_W) + "\n" + str(SCREEN_SIZE_H) + "\n" + str(showSun) + "\n" + str(showMercury) + "\n" + str(showVenus)
+                  + "\n" + str(showEarth) + "\n" + str(showMars) + "\n" + str(showJupiter)
                   + "\n" + str(showSaturn) + "\n" + str(showUranus) + "\n" + str(showNeptune) + "\n" + str(showPaths) + "\n" + str(years) + "\n" + str(month) + "\n" + str(day)
                   + "\n" + str(hour) + "\n" + str(minute) + "\n" + str(second) + "\n" + str(speed))
     fichier.close()
@@ -335,6 +337,8 @@ startLabelFrame.place(x=(m[0]/2)+225, y=(m[1]/2)+225, width=300, height=420, anc
 #display parameters
 boutonFullScreen = Checkbutton(screenLabelFrame, text="Full Screen", variable=varFullScreen, font=(None,policeSize))
 boutonFullScreen.pack()
+labelInfoScreen = Label(screenLabelFrame, text="\"echap\" to leave the full screen", font=(None,12))
+labelInfoScreen.pack()
 labelSCREEN_SIZE_W = Label(screenLabelFrame, text="Screen size width", font=(None,policeSize))
 labelSCREEN_SIZE_W.pack()
 sSCREEN_SIZE_W = Spinbox(screenLabelFrame, from_=0, textvariable=varsSCREEN_SIZE_W)
