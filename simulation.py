@@ -276,7 +276,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     pygame.quit()
                     quit()
                 
-                if event.type == KEYDOWN and event.key == K_UP:
+                if event.type == KEYDOWN and event.key == K_z:
                     for i in saveChangeRotate:
                         if i == "a":
                             glRotatef(-1, 1, 0, 0)
@@ -307,7 +307,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                         elif i == "y":
                             glRotatef(-1, 0, 0, 1)
                             
-                if event.type == KEYDOWN and event.key == K_DOWN:
+                if event.type == KEYDOWN and event.key == K_a:
                     for i in saveChangeRotate:
                         if i == "a":
                             glRotatef(-1, 1, 0, 0)
@@ -339,11 +339,11 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                             glRotatef(-1, 0, 0, 1)
 
 
-                if event.type == KEYDOWN and event.key == K_a:
+                if event.type == KEYDOWN and event.key == K_UP:
                     glRotatef(1, 1, 0, 0) #(degres, x, y, z)
                     saveChangeRotate = "a" + saveChangeRotate
                     saveChangeRotateReturn += "a"
-                if event.type == KEYDOWN and event.key == K_z:
+                if event.type == KEYDOWN and event.key == K_DOWN:
                     glRotatef(-1, 1, 0, 0)
                     saveChangeRotate = "z" + saveChangeRotate
                     saveChangeRotateReturn += "z"
