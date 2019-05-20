@@ -230,16 +230,15 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
         glMaterial(GL_FRONT, GL_DIFFUSE, (1.0, 1.0, 1.0, 1.0))
 
         #tailles planètes
-        sizeBall = 1
         sunSize = 2
-        mercurySize = 0.05
-        venusSize = 0.12
-        earthSize = 0.13
-        marsSize = 0.07
-        jupiterSize = 1.43
-        saturnSize = 1.21
-        uranusSize = 0.51
-        neptuneSize = 0.5
+        mercurySize = 0.025
+        venusSize = 0.06
+        earthSize = 0.065
+        marsSize = 0.035
+        jupiterSize = 0.715
+        saturnSize = 0.605
+        uranusSize = 0.255
+        neptuneSize = 0.25
 
         #for zoom
         saveChangeRotate = ""
@@ -292,7 +291,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                             glRotatef(1, 0, 0, 1)
                     glTranslatef(0,0,0.5)
                     sunSize -= 0.01
-                    sizeBall -= 0.001
                     for i in saveChangeRotateReturn:
                         if i == "a":
                             glRotatef(1, 1, 0, 0)
@@ -323,7 +321,6 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                             glRotatef(1, 0, 0, 1)
                     glTranslatef(0,0,-0.5)
                     sunSize += 0.01
-                    sizeBall += 0.001
                     for i in saveChangeRotateReturn:
                         if i == "a":
                             glRotatef(1, 1, 0, 0)
@@ -394,7 +391,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 MercuryX = posMercury[0] * 1.3
                 MercuryY = posMercury[1] * 1.3
                 MercuryZ = posMercury[2] * 1.3
-                Mercury = Ball([MercuryX,MercuryY,MercuryZ], "mercuryTexture", mercurySize * sizeBall)
+                Mercury = Ball([MercuryX,MercuryY,MercuryZ], "mercuryTexture", mercurySize)
                 Mercury.render()
                 if (showPaths):
                     pos_hist_mercury.append((MercuryX,MercuryY,MercuryZ))
@@ -411,7 +408,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 VenusX = posVenus[0] * 1.3
                 VenusY = posVenus[1] * 1.3
                 VenusZ = posVenus[2] * 1.3
-                Venus = Ball([VenusX,VenusY,VenusZ], "venusTexture", venusSize * sizeBall)
+                Venus = Ball([VenusX,VenusY,VenusZ], "venusTexture", venusSize)
                 Venus.render()
                 if (showPaths):
                     pos_hist_venus.append((VenusX,VenusY,VenusZ))
@@ -425,10 +422,10 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
 
             if(showEarth == 1):
                 posEarth = sun.at(t).observe(earth).position.au
-                EarthX = posEarth[0] * 1.3
-                EarthY = posEarth[1] * 1.3
-                EarthZ = posEarth[2] * 1.3
-                Earth = Ball([EarthX,EarthY,EarthZ], "earthTexture", earthSize * sizeBall)
+                EarthX = posEarth[0]
+                EarthY = posEarth[1]
+                EarthZ = posEarth[2]
+                Earth = Ball([EarthX,EarthY,EarthZ], "earthTexture", earthSize)
                 Earth.render()
                 if (showPaths):
                     pos_hist_earth.append((EarthX,EarthY,EarthZ))
@@ -439,13 +436,14 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                     for xEarth, yEarth, zEarth in pos_hist_earth:
                         glVertex3f(xEarth, yEarth, zEarth)
                     glEnd()
+                print(posEarth)
 
             if(showMars == 1):
                 posMars = sun.at(t).observe(mars).position.au
                 MarsX = posMars[0] * 1.3
                 MarsY = posMars[1] * 1.3
                 MarsZ = posMars[2] * 1.3
-                Mars = Ball([MarsX,MarsY,MarsZ], "marsTexture", marsSize * sizeBall)
+                Mars = Ball([MarsX,MarsY,MarsZ], "marsTexture", marsSize)
                 Mars.render()
                 if (showPaths):
                     pos_hist_mars.append((MarsX,MarsY,MarsZ))
@@ -462,7 +460,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 JupiterX = posJupiter[0] * 1.3
                 JupiterY = posJupiter[1] * 1.3
                 JupiterZ = posJupiter[2] * 1.3
-                Jupiter = Ball([JupiterX,JupiterY,JupiterZ], "jupiterTexture", jupiterSize * sizeBall)
+                Jupiter = Ball([JupiterX,JupiterY,JupiterZ], "jupiterTexture", jupiterSize)
                 Jupiter.render()
                 if (showPaths):
                     pos_hist_jupiter.append((JupiterX,JupiterY,JupiterZ))
@@ -479,7 +477,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 SaturnX = posSaturn[0] * 1.3
                 SaturnY = posSaturn[1] * 1.3
                 SaturnZ = posSaturn[2] * 1.3
-                Saturn = Ball([SaturnX,SaturnY,SaturnZ], "saturnTexture", saturnSize * sizeBall)
+                Saturn = Ball([SaturnX,SaturnY,SaturnZ], "saturnTexture", saturnSize)
                 Saturn.render()
                 if (showPaths):
                     pos_hist_saturn.append((SaturnX,SaturnY,SaturnZ))
@@ -496,7 +494,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 UranusX = posUranus[0] * 1.3
                 UranusY = posUranus[1] * 1.3
                 UranusZ = posUranus[2] * 1.3
-                Uranus = Ball([UranusX,UranusY,UranusZ], "uranusTexture", uranusSize * sizeBall)
+                Uranus = Ball([UranusX,UranusY,UranusZ], "uranusTexture", uranusSize)
                 Uranus.render()
                 if (showPaths):
                     pos_hist_uranus.append((UranusX,UranusY,UranusZ))
@@ -513,7 +511,7 @@ def goSimulation(SCREEN_SIZE, fullScreen, showSun, showMercury, showVenus, showE
                 NeptuneX = posNeptune[0] * 1.3
                 NeptuneY = posNeptune[1] * 1.3
                 NeptuneZ = posNeptune[2] * 1.3
-                Neptune = Ball([NeptuneX,NeptuneY,NeptuneZ], "neptuneTexture", neptuneSize * sizeBall)
+                Neptune = Ball([NeptuneX,NeptuneY,NeptuneZ], "neptuneTexture", neptuneSize)
                 Neptune.render()
                 if (showPaths):
                     pos_hist_neptune.append((NeptuneX,NeptuneY,NeptuneZ))
