@@ -2,7 +2,7 @@
 
 ## About
 
-Solarpy is a simulation of solair system programmed in Python. This project is a work in collaboration with a comrade.
+Solarpy is a simulation of solar system programmed in Python. This project is a work in collaboration with a comrade.
 
 The program allows you to observe the solar system by moving through the space using the keys on your keyboard. You can choose at the launch of the program which planets you want to display and the date on which you want to see them.
 When launching the simulation, you are at a distance from the sun that allows you to see the farthest planet. You can then zoom in to display the planets closest to the sun. The size of the planets and the distance between them is proportional to reality. On the other hand, the size of the sun is adapted.
