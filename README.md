@@ -1,4 +1,4 @@
-# Solarpy
+# Solarpy :earth_africa: :sunny: 
 
 ## About
 
